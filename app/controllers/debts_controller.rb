@@ -38,7 +38,7 @@ class DebtsController < ApplicationController
 
   # POST /debts/pay
   def pay
-    debt = Debt.find_by(debtId: pay_params[:debtId])
+    debt = Debt.find_by(debt_id: pay_params[:debtId])
 
       return render json: { error: "Registro não encontrado" }, status: :not_found if debt.nil?
 
@@ -46,7 +46,7 @@ class DebtsController < ApplicationController
       paid_at = DateTime.parse(pay_params[:paidAt]) rescue nil
       paid_by = pay_params[:paidBy]
 
-      debt.debtAmount -= paid_amount
+      debt.debt_amount -= paid_amount
 
       if debt.debt_amount <= 0
         debt.paid_status = true
@@ -58,8 +58,8 @@ class DebtsController < ApplicationController
 
       if debt.save
         render json: {
-          debtId: debt.debtId,
-          remaining: debt.debtAmount.to_f,
+          debtId: debt.debt_id,
+          remaining: debt.debt_amount.to_f,
           paid_status: debt.paid_status,
           paid_at: debt.paid_at,
           paid_by: debt.paid_by

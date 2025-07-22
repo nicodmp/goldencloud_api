@@ -1,5 +1,5 @@
 class Debt < ApplicationRecord
-  validates :name, :governmentId, :email, :debtAmount, :debtDueDate, :debtId, presence: true
+  validates :name, :government_id, :email, :debt_amount, :debt_due_date, :debt_id, presence: true
 
-  validates :debtAmount, numericality: { greater_than_or_equal_to: 0 }
+  validates :debt_amount, numericality: { greater_than_or_equal_to: 0 }
 end

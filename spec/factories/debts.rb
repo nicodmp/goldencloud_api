@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :debt do
     name { "Fulano" }
-    governmentId { "12345678900" }
+    government_id { "12345678900" }
     email { "fulano@email.com" }
-    debtAmount { "9.99" }
-    debtDueDate { "2025-07-22 07:52:29" }
-    debtId { "debt-12345" }
+    debt_amount { "9.99" }
+    debt_due_date { "2025-07-22 07:52:29" }
+    debt_id { "debt-12345" }
   end
 end

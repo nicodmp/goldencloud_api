@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_194725) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_195702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "debts", force: :cascade do |t|
     t.string "name"
-    t.string "governmentId"
-    t.decimal "debtAmount"
+    t.string "government_id"
+    t.decimal "debt_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "paid_status", default: false, null: false
     t.datetime "paid_at"
     t.string "paid_by"
     t.string "email"
-    t.string "debtId"
+    t.string "debt_id"
     t.date "debt_due_date", null: false
   end
 end

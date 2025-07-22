@@ -18,11 +18,11 @@ class DebtImportService
 
       debt = Debt.new(
         name:           row["name"],
-        governmentId:  row["governmentId"],
+        government_id:  row["governmentId"],
         email:          row["email"],
-        debtAmount:    row["debtAmount"],
+        debt_amount:    row["debtAmount"],
         debt_due_date:  row["debtDueDate"],
-        debtId:        row["debtId"]
+        debt_id:        row["debtId"]
       )
 
       if debt.save
