@@ -1,5 +1,6 @@
 class DebtsController < ApplicationController
   before_action :set_debt, only: %i[ show destroy ]
+  protect_from_forgery unless: -> { request.format.json? }
 
   # GET /debts or /debts.json
   def index
@@ -17,11 +18,29 @@ class DebtsController < ApplicationController
     head :no_content
   end
 
+  # POST /debts/import
+  def import
+    unless params[:file].present?
+      return render json: { error: "Por favor, envie um arquivo CSV." }, status: :bad_request
+    end
+
+    service = DebtImportService.new(params[:file])
+    result = service.call
+
+    payload = {
+      imported_count: result.success_count,
+      errors:         result.error_rows
+    }
+
+    status_code = result.error_rows.empty? ? :ok : :multi_status
+    render json: payload, status: status_code
+  end
+
   # POST /debts/pay
   def pay
     debt = Debt.find_by(debtId: pay_params[:debtId])
 
-      return render json: { error: 'Registro não encontrado' }, status: :not_found if debt.nil?
+      return render json: { error: "Registro não encontrado" }, status: :not_found if debt.nil?
 
       paid_amount = BigDecimal(pay_params[:paidAmount].to_s)
       paid_at = DateTime.parse(pay_params[:paidAt]) rescue nil
@@ -39,7 +58,7 @@ class DebtsController < ApplicationController
 
       if debt.save
         render json: {
-          debtId: debt.debtId
+          debtId: debt.debtId,
           remaining: debt.debtAmount.to_f,
           paid_status: debt.paid_status,
           paid_at: debt.paid_at,

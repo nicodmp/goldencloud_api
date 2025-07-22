@@ -1,7 +1,6 @@
-require 'csv'
+require "csv"
 
 class DebtImportService
-
   Result = Struct.new(:success_count, :error_rows)
 
   def initialize(file)
@@ -13,23 +12,23 @@ class DebtImportService
   def call
     CSV.foreach(@file.path, headers: true).with_index(2) do |row, line_number|
       if row.to_hash.values.any?(&:blank?)
-        @error_rows << { line: line_number, error: 'Dados faltando em alguma coluna' }
+        @error_rows << { line: line_number, error: "Dados faltando em alguma coluna" }
         next
       end
 
       debt = Debt.new(
-        name:           row['name'],
-        governmentId:  row['governmentId'],
-        email:          row['email'],
-        debtAmount:    row['debtAmount'],
-        debtDueDate:  row['debtDueDate'],
-        debtId:        row['debtId']
+        name:           row["name"],
+        governmentId:  row["governmentId"],
+        email:          row["email"],
+        debtAmount:    row["debtAmount"],
+        debtDueDate:  row["debtDueDate"],
+        debtId:        row["debtId"]
       )
 
       if debt.save
         @successes += 1
       else
-        @error_rows << { line: line_number, error: debt.errors.full_messages.join(', ') }
+        @error_rows << { line: line_number, error: debt.errors.full_messages.join(", ") }
       end
     end
 
