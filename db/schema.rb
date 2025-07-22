@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_195702) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_224313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,5 +26,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_195702) do
     t.string "email"
     t.string "debt_id"
     t.date "debt_due_date", null: false
+    t.index ["debt_id"], name: "index_debts_on_debt_id", unique: true
   end
 end
