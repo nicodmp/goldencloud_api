@@ -1,0 +1,10 @@
+<p>Olá, <strong><%= @debt.name %></strong></p>
+
+<p>
+  Gostaríamos de lembrar que sua dívida no valor de
+  <strong>R$<%= number_with_precision(@debt.debt_amount, precision: 2, delimiter: ',') %></strong>,
+  com vencimento em <strong><%= I18n.l(@debt.debt_due_date, format: "%d/%m/%Y") %></strong>
+  continua em aberto.
+</p>
+
+<p>Solicitamos que entre em contato conosco para mais informações. Obrigado!</p>
