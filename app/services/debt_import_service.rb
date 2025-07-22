@@ -21,7 +21,7 @@ class DebtImportService
         governmentId:  row["governmentId"],
         email:          row["email"],
         debtAmount:    row["debtAmount"],
-        debtDueDate:  row["debtDueDate"],
+        debt_due_date:  row["debtDueDate"],
         debtId:        row["debtId"]
       )
 
