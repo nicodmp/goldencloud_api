@@ -41,6 +41,8 @@ Envie o arquivo csv através do Postman, definindo o tipo do body como "form-dat
 
 
 `POST http://localhost:3000/debts/pay`
+
+Webhook para dar baixa em dívida paga. Recebe um body como o exemplo abaixo, subtraindo o saldo da dívida e alterando a coluna "paid_status" para true caso o saldo seja zerado.
    
    - Exemplo de request:
 ```
@@ -57,8 +59,11 @@ Envie o arquivo csv através do Postman, definindo o tipo do body como "form-dat
 
 ```
 {
-	"imported_count": 100000,
-	"errors": []
+    "debtId": "debt-100000-5644",
+    "remaining": 0.0,
+    "paid_status": true,
+    "paid_at": "2075-07-29T11:00:00.000Z",
+    "paid_by": "Magrinho"
 }
 ```
 
