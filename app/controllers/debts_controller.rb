@@ -77,7 +77,10 @@ class DebtsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_debt
-      @debt = Debt.find(params[:id])
+      @debt = Debt.find_by(id: params[:id])
+      return if @debt
+
+      render json: { error: "Registro não encontrado por id" }, status: :not_found
     end
 
     # Only allow a list of trusted parameters through.
