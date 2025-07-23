@@ -43,35 +43,19 @@ class DebtsController < ApplicationController
 
   # POST /debts/pay
   def pay
-    debt = Debt.find_by(debt_id: pay_params[:debtId])
+    result = DebtPaymentService.new(
+      debt_id:     pay_params[:debtId],
+      paid_amount: pay_params[:paidAmount],
+      paid_at:     pay_params[:paidAt],
+      paid_by:     pay_params[:paidBy]
+    ).call
 
-      return render json: { error: "Registro não encontrado" }, status: :not_found if debt.nil?
-
-      paid_amount = BigDecimal(pay_params[:paidAmount].to_s)
-      paid_at = DateTime.parse(pay_params[:paidAt]) rescue nil
-      paid_by = pay_params[:paidBy]
-
-      debt.debt_amount -= paid_amount
-
-      if debt.debt_amount <= 0
-        debt.paid_status = true
-        debt.debt_amount = 0
-      end
-
-      debt.paid_at = paid_at
-      debt.paid_by = paid_by
-
-      if debt.save
-        render json: {
-          debtId: debt.debt_id,
-          remaining: debt.debt_amount.to_f,
-          paid_status: debt.paid_status,
-          paid_at: debt.paid_at,
-          paid_by: debt.paid_by
-        }, status: :ok
-      else
-        render json: { error: debt.errors.full_messages }, status: :unprocessable_entity
-      end
+    if result.success
+      render json: result.payload, status: :ok
+    else
+      status = result.error == "Registro não encontrado" ? :not_found : :unprocessable_entity
+      render json: { error: result.error }, status: status
+    end
   end
 
   private
