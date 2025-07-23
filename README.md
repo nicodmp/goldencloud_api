@@ -19,7 +19,7 @@ Então, basta executar `rails s` no terminal da sessão do Docker para subir a a
 
 ### Acessando a API
 
- Após subir o projeto Rails pelo método de sua escolha, baixe o arquivo da collection `goldencloud.json` disponível na raiz do projeto e importe para o Postman, então execute os requests apontando para `localhost:3000`.
+ Após subir o projeto Rails pelo método de sua escolha, baixe o arquivo da collection `goldencloud.postman_collection.json` disponível na raiz do projeto e importe para o Postman, então execute os requests apontando para `localhost:3000`.
 
 ### Endpoints:
 

@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "b2ab76b3-8e44-4482-9708-86dd9dfa9e14",
+		"name": "goldencloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46236817",
+		"_collection_link": "https://nicolas-8014585.postman.co/workspace/Nicolas's-Workspace~c35e6e9b-32d2-4e8a-8eb9-6ae482b47d5a/collection/46236817-b2ab76b3-8e44-4482-9708-86dd9dfa9e14?action=share&source=collection_link&creator=46236817"
+	},
+	"item": [
+		{
+			"name": "import csv",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"contentType": "text/csv",
+							"type": "file",
+							"src": "/home/nicodmp/Downloads/dados_cobranca_seeyu.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/debts/import",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"debts",
+						"import"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay webhook",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"debtId\": \"debt-1-1903\",\n\"paidAt\": \"2025-07-19 10:00:00\",\n\"paidAmount\": 2261.57,\n\"paidBy\": \"Fulano\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/debts/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"debts",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "index debts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/debts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"debts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "find by debt_id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"debts"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "find debt by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/debts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"debts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
