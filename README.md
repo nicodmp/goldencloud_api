@@ -21,11 +21,11 @@ Então, basta executar `rails s` no terminal da sessão do Docker para subir a a
 
  Após subir o projeto Rails pelo método de sua escolha, baixe o arquivo da collection `goldencloud.json` disponível na raiz do projeto e importe para o Postman, então execute os requests apontando para `localhost:3000`.
 
-- Endpoints:
+### Endpoints:
 
-	`POST http://localhost:3000/debts/import`
+`POST http://localhost:3000/debts/import`
 	
-	Envie o arquivo csv através do Postman, definindo o tipo do body como "form-data", com uma key do tipo "File" e fazendo o upload do arquivo do seu computador para o value. 
+Envie o arquivo csv através do Postman, definindo o tipo do body como "form-data", com uma key do tipo "File" e fazendo o upload do arquivo do seu computador para o value. Um arquivo CSV com 100000 linhas leva cerca de 10 segundos para ser processado.
 
 - Exemplo de resposta:
 
@@ -37,7 +37,8 @@ Então, basta executar `rails s` no terminal da sessão do Docker para subir a a
 ```
 
 
-   `POST http://localhost:3000/debts/pay`
+
+`POST http://localhost:3000/debts/pay`
    
    - Exemplo de request:
 ```
@@ -56,5 +57,106 @@ Então, basta executar `rails s` no terminal da sessão do Docker para subir a a
 {
 	"imported_count": 100000,
 	"errors": []
+}
+```
+
+`GET http://localhost:3000/debts`
+	
+Retorna uma lista de debts. É possível filtrar por params usando o debt_id, por exemplo, `http://localhost:3000/debts?debt_id=debt-1-1234`
+
+- Exemplo de resposta:
+
+```
+[
+    {
+        "id": 1,
+        "name": "Cliente 1",
+        "government_id": "11111111112",
+        "debt_amount": "2261.57",
+        "created_at": "2025-07-23T04:10:27.003Z",
+        "updated_at": "2025-07-23T04:10:27.003Z",
+        "paid_status": false,
+        "paid_at": null,
+        "paid_by": null,
+        "email": "cliente1@seeyu.com.br",
+        "debt_id": "debt-1-1093",
+        "debt_due_date": "2025-08-08"
+    },
+    {
+        "id": 2,
+        "name": "Cliente 2",
+        "government_id": "11111111113",
+        "debt_amount": "1653.73",
+        "created_at": "2025-07-23T04:10:27.003Z",
+        "updated_at": "2025-07-23T04:10:27.003Z",
+        "paid_status": false,
+        "paid_at": null,
+        "paid_by": null,
+        "email": "cliente2@seeyu.com.br",
+        "debt_id": "debt-2-975",
+        "debt_due_date": "2026-04-05"
+    }
+]
+```
+
+`GET http://localhost:3000/debts`
+	
+Retorna uma lista de debts. É possível filtrar por params usando o debt_id, por exemplo, `http://localhost:3000/debts?debt_id=debt-1-1234`
+
+- Exemplo de resposta:
+
+```
+[
+    {
+        "id": 1,
+        "name": "Cliente 1",
+        "government_id": "11111111112",
+        "debt_amount": "2261.57",
+        "created_at": "2025-07-23T04:10:27.003Z",
+        "updated_at": "2025-07-23T04:10:27.003Z",
+        "paid_status": false,
+        "paid_at": null,
+        "paid_by": null,
+        "email": "cliente1@seeyu.com.br",
+        "debt_id": "debt-1-1093",
+        "debt_due_date": "2025-08-08"
+    },
+    {
+        "id": 2,
+        "name": "Cliente 2",
+        "government_id": "11111111113",
+        "debt_amount": "1653.73",
+        "created_at": "2025-07-23T04:10:27.003Z",
+        "updated_at": "2025-07-23T04:10:27.003Z",
+        "paid_status": false,
+        "paid_at": null,
+        "paid_by": null,
+        "email": "cliente2@seeyu.com.br",
+        "debt_id": "debt-2-975",
+        "debt_due_date": "2026-04-05"
+    }
+]
+```
+
+`GET http://localhost:3000/debts/:id`
+	
+Retorna um único debt por id.
+
+- Exemplo de resposta:
+
+```
+{
+    "id": 1,
+    "name": "Cliente 1",
+    "government_id": "11111111112",
+    "debt_amount": "2261.57",
+    "created_at": "2025-07-23T04:10:27.003Z",
+    "updated_at": "2025-07-23T04:10:27.003Z",
+    "paid_status": false,
+    "paid_at": null,
+    "paid_by": null,
+    "email": "cliente1@seeyu.com.br",
+    "debt_id": "debt-1-1093",
+    "debt_due_date": "2025-08-08"
 }
 ```

@@ -1,21 +1,26 @@
 class DebtsController < ApplicationController
-  before_action :set_debt, only: %i[ show destroy ]
+  before_action :set_debt, only: %i[ show ]
   protect_from_forgery unless: -> { request.format.json? }
 
   # GET /debts or /debts.json
   def index
-    @debts = Debt.all
+    debts =
+      if params[:debt_id].present?
+        Debt.where(debt_id: params[:debt_id])
+      else
+        Debt.all
+      end
+
+    if debts.empty?
+      render json: { error: "Nenhum registro encontrado" }, status: :not_found
+    else
+      render json: debts, status: :ok
+    end
   end
 
   # GET /debts/1 or /debts/1.json
   def show
     render json: @debt
-  end
-
-  # DELETE /debts/1 or /debts/1.json
-  def destroy
-    @debt.destroy
-    head :no_content
   end
 
   # POST /debts/import
@@ -72,7 +77,7 @@ class DebtsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_debt
-      @debt = Debt.find(params.expect(:id))
+      @debt = Debt.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
