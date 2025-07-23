@@ -106,45 +106,6 @@ Retorna uma lista de debts. É possível filtrar por params usando o debt_id, po
 ]
 ```
 
-`GET http://localhost:3000/debts`
-	
-Retorna uma lista de debts. É possível filtrar por params usando o debt_id, por exemplo, `http://localhost:3000/debts?debt_id=debt-1-1234`
-
-- Exemplo de resposta:
-
-```
-[
-    {
-        "id": 1,
-        "name": "Cliente 1",
-        "government_id": "11111111112",
-        "debt_amount": "2261.57",
-        "created_at": "2025-07-23T04:10:27.003Z",
-        "updated_at": "2025-07-23T04:10:27.003Z",
-        "paid_status": false,
-        "paid_at": null,
-        "paid_by": null,
-        "email": "cliente1@seeyu.com.br",
-        "debt_id": "debt-1-1093",
-        "debt_due_date": "2025-08-08"
-    },
-    {
-        "id": 2,
-        "name": "Cliente 2",
-        "government_id": "11111111113",
-        "debt_amount": "1653.73",
-        "created_at": "2025-07-23T04:10:27.003Z",
-        "updated_at": "2025-07-23T04:10:27.003Z",
-        "paid_status": false,
-        "paid_at": null,
-        "paid_by": null,
-        "email": "cliente2@seeyu.com.br",
-        "debt_id": "debt-2-975",
-        "debt_due_date": "2026-04-05"
-    }
-]
-```
-
 `GET http://localhost:3000/debts/:id`
 	
 Retorna um único debt por id.
