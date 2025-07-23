@@ -1,4 +1,4 @@
-## Vendas-API
+## Dividas-API
 
 Este projeto é uma API desenvolvida em Ruby on Rails, conectada a um banco PostgreSQL, que importa registros de dívida a partir de um arquivo csv, aceita baixas de dívidas individuais via webhook, e agenda envio de emails para lembrete de dívidas em aberto.
 
@@ -19,7 +19,7 @@ Então, basta executar `rails s` no terminal da sessão do Docker para subir a a
 
 ### Acessando a API
 
- Após subir o projeto Rails pelo método de sua escolha, baixe o arquivo da collection `goldencloud.json` disponível na raiz do projeto e importe para o Postman, então execute os requests apontando para localhost:3000.
+ Após subir o projeto Rails pelo método de sua escolha, baixe o arquivo da collection `goldencloud.json` disponível na raiz do projeto e importe para o Postman, então execute os requests apontando para `localhost:3000`.
 
 - Endpoints:
 
